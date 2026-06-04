@@ -133,111 +133,142 @@ nav.scrolled{background:rgba(245,243,239,0.97);box-shadow:0 1px 20px rgba(20,18,
 .hero-contact-val{font-size:13px;color:var(--ink2);text-decoration:none;transition:color 0.2s}
 a.hero-contact-val:hover{color:var(--accent)}
 
-/* ── HERO RIGHT SPOTLIGHT ── */
+/* ── HERO RIGHT — PROJECT SHOWCASE ── */
 .hero-right{
-  position:relative;height:auto;min-height:clamp(380px,55vw,600px);
-  background:var(--ink);overflow:hidden;
+  position:relative;
+  background:var(--ink);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(24px,3vw,52px) clamp(20px,3.5vw,48px);
+  overflow:hidden;
+  min-height:clamp(420px,50vw,640px);
 }
-/* Animated grain */
 .hero-right::before{
-  content:'';position:absolute;inset:-50%;width:200%;height:200%;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  opacity:0.6;pointer-events:none;z-index:1;
-  animation:grainShift 8s steps(2) infinite;
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.5;pointer-events:none;z-index:0;
 }
-@keyframes grainShift{
-  0%{transform:translate(0,0)}20%{transform:translate(-2%,-1%)}
-  40%{transform:translate(2%,2%)}60%{transform:translate(-1%,2%)}
-  80%{transform:translate(1%,-2%)}100%{transform:translate(0,0)}
+.hp-label{
+  font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(255,255,255,0.28);margin-bottom:20px;position:relative;z-index:1;
+  display:flex;align-items:center;gap:10px;
 }
-/* Ambient glow per slide */
-.spotlight-glow{
-  position:absolute;width:60%;aspect-ratio:1;border-radius:50%;
-  filter:blur(80px);opacity:0;pointer-events:none;z-index:1;
-  transition:opacity 1s ease,background 1s ease;
-  top:10%;left:10%;
+.hp-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.hp-list{display:flex;flex-direction:column;gap:6px;position:relative;z-index:1;}
+.hp-item{
+  border:1px solid rgba(255,255,255,0.07);border-radius:6px;
+  background:rgba(255,255,255,0.03);cursor:pointer;
+  transition:border-color 0.25s,background 0.25s;overflow:hidden;
 }
-.spotlight-slide{
-  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:clamp(28px,4vw,52px);opacity:0;transition:opacity 0.7s ease;
-  pointer-events:none;z-index:3;
+.hp-item:hover{border-color:rgba(255,255,255,0.14);background:rgba(255,255,255,0.05)}
+.hp-item.active{border-color:rgba(193,123,47,0.4);background:rgba(193,123,47,0.07)}
+.hp-header{
+  display:flex;align-items:center;gap:14px;padding:14px 18px;user-select:none;
 }
-.spotlight-slide.active{opacity:1;pointer-events:all}
-.spotlight-slide::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(to top,rgba(14,12,10,1) 0%,rgba(14,12,10,0.82) 45%,rgba(14,12,10,0.45) 75%,rgba(14,12,10,0.08) 100%);
-  z-index:-1;
-}
-.spotlight-preview{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  overflow:hidden;z-index:0;
-}
-.spotlight-preview iframe{
-  width:160%;height:160%;
-  border:none;pointer-events:none;
-  transform:scale(0.625);transform-origin:top left;
-  opacity:0.55;
-}
-.spotlight-preview-svg{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  overflow:hidden;z-index:0;
-  opacity:0.45;
-}
-.spotlight-preview-sylvester{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  z-index:0;overflow:hidden;
+.hp-icon{
+  width:36px;height:36px;border-radius:8px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
+  font-size:17px;transition:transform 0.2s;
 }
-.spotlight-preview-driveu{
-  position:absolute;top:0;left:0;right:0;bottom:0;
-  z-index:0;overflow:hidden;
-  display:flex;align-items:center;justify-content:center;
+.hp-item.active .hp-icon{transform:scale(1.08)}
+.hp-icon.fluent{background:linear-gradient(135deg,#1a2744,#2a3f6f)}
+.hp-icon.cardekho{background:linear-gradient(135deg,#1f2a1a,#2e4a22)}
+.hp-icon.driveu{background:linear-gradient(135deg,#2a1f14,#4a3020)}
+.hp-title-group{flex:1;min-width:0}
+.hp-name{font-size:14px;font-weight:500;color:#FDFCFA;line-height:1.2;letter-spacing:-0.01em}
+.hp-tagline{font-size:11px;color:rgba(255,255,255,0.35);margin-top:2px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hp-badge-wrap{flex-shrink:0;display:flex;align-items:center;gap:8px}
+.hp-badge{
+  font-size:8px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;
+  padding:3px 8px;border-radius:2px;white-space:nowrap;
 }
-.spotlight-slide::after{
-  content:'';position:absolute;left:0;bottom:0;width:0;height:2px;
-  background:var(--accent);transition:width 1s 0.6s var(--ease-out-expo);
+.hp-badge.live{color:var(--green);border:1px solid rgba(123,200,164,0.3);background:rgba(123,200,164,0.1);display:flex;align-items:center;gap:4px}
+.hp-badge.live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);animation:livePulse 1.6s ease-in-out infinite}
+.hp-badge.prd{color:#C8B090;border:1px solid rgba(200,176,144,0.25);background:rgba(200,176,144,0.06)}
+.hp-chevron{color:rgba(255,255,255,0.2);font-size:10px;transition:transform 0.3s var(--ease-out-expo),color 0.2s;flex-shrink:0}
+.hp-item.active .hp-chevron{transform:rotate(180deg);color:var(--accent)}
+.hp-body{max-height:0;overflow:hidden;transition:max-height 0.4s var(--ease-out-expo)}
+.hp-item.active .hp-body{max-height:360px}
+.hp-body-inner{
+  padding:0 18px 18px;border-top:1px solid rgba(255,255,255,0.06);
+  display:flex;flex-direction:column;gap:12px;
 }
-.spotlight-slide.active::after{width:100%}
-.spotlight-slide-bg-num{
-  position:absolute;right:-8px;top:-16px;
-  font-family:var(--serif);font-size:clamp(90px,15vw,200px);font-weight:700;
-  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.04);
-  line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.05em;z-index:0;
+.hp-insight{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(13px,1.1vw,15px);color:rgba(255,255,255,0.72);
+  line-height:1.5;padding-top:14px;
 }
-.spotlight-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
-  padding:4px 10px;border-radius:2px;margin-bottom:14px;align-self:flex-start;
-  backdrop-filter:blur(4px);
+.hp-chips{display:flex;gap:6px;flex-wrap:wrap}
+.hp-chip{
+  font-size:10px;color:rgba(255,255,255,0.45);
+  border:1px solid rgba(255,255,255,0.09);border-radius:20px;
+  padding:3px 10px;background:rgba(255,255,255,0.03);white-space:nowrap;
 }
-.spotlight-badge.live{color:var(--green);border:1px solid rgba(123,200,164,0.3);background:rgba(123,200,164,0.1)}
-.spotlight-badge.live::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:livePulse 1.6s ease-in-out infinite;flex-shrink:0}
-.spotlight-badge.prd{color:#C8B090;border:1px solid rgba(200,176,144,0.3);background:rgba(200,176,144,0.08)}
-.spotlight-badge.ai{color:#A8B8D0;border:1px solid rgba(168,184,208,0.3);background:rgba(168,184,208,0.08)}
-@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.6)}}
-.spotlight-type{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px}
-.spotlight-title{
-  font-family:var(--serif);font-size:clamp(16px,2vw,26px);font-weight:600;
-  color:#FDFCFA;line-height:1.2;margin-bottom:14px;letter-spacing:-0.01em;
-}
-.spotlight-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,0.38);margin-bottom:22px}
-.spotlight-cta-row{display:flex;gap:10px;flex-wrap:wrap}
-.spotlight-cta{
+.hp-chip.highlight{color:var(--accent);border-color:rgba(193,123,47,0.25);background:rgba(193,123,47,0.06)}
+.hp-ctas{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.hp-cta{
   font-size:10px;font-weight:500;letter-spacing:0.09em;text-transform:uppercase;
-  padding:9px 18px;text-decoration:none;transition:all 0.22s;
-  display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;
+  padding:8px 16px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  border:none;cursor:pointer;border-radius:3px;transition:all 0.2s;font-family:var(--sans);
 }
-.spotlight-cta.primary{background:var(--accent);color:var(--white);position:relative;overflow:hidden}
-.spotlight-cta.primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-101%);transition:transform 0.3s var(--ease-out-expo)}
-.spotlight-cta.primary:hover::before{transform:translateX(0)}
-.spotlight-cta.primary:hover{transform:translateY(-1px)}
-.spotlight-cta.ghost{border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.55);background:transparent}
-.spotlight-cta.ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff;transform:translateY(-1px)}
-.spotlight-dots{position:absolute;top:50%;right:18px;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:10}
-.sdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:all 0.35s;border:none;padding:0}
-.sdot.active{background:#fff;height:20px;border-radius:2px}
-.spotlight-progress{position:absolute;bottom:0;left:0;right:0;height:2px;background:rgba(255,255,255,0.06);z-index:10}
-.spotlight-progress-bar{height:100%;background:var(--accent);width:0;transition:width linear}
+.hp-cta.primary{background:var(--accent);color:#fff;position:relative;overflow:hidden}
+.hp-cta.primary::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.15);transform:translateX(-101%);transition:transform 0.28s var(--ease-out-expo)}
+.hp-cta.primary:hover::before{transform:translateX(0)}
+.hp-cta.primary:hover{transform:translateY(-1px)}
+.hp-cta.ghost{border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);background:transparent}
+.hp-cta.ghost:hover{border-color:rgba(255,255,255,0.45);color:#fff;transform:translateY(-1px)}
+.hp-footer{
+  margin-top:18px;position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.hp-footer-note{font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:0.04em}
+.hp-footer-link{
+  font-size:10px;font-weight:500;color:rgba(255,255,255,0.3);letter-spacing:0.08em;
+  text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:5px;
+  transition:color 0.2s;
+}
+.hp-footer-link:hover{color:var(--accent)}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.6)}}
+@media(max-width:768px){
+  /* Hero accordion */
+  .hero-right{min-height:auto;padding:28px 20px 32px}
+  .hp-item.active .hp-body{max-height:420px}
+  .hp-tagline{white-space:normal}
+  .hp-header{padding:12px 14px;gap:10px}
+  .hp-icon{width:32px;height:32px;font-size:15px;border-radius:7px}
+  .hp-name{font-size:13px}
+  .hp-body-inner{padding:0 14px 14px}
+  .hp-insight{font-size:13px;padding-top:12px}
+  .hp-footer{margin-top:14px}
+  /* Featured cards stack */
+  .featured-strip{grid-template-columns:1fr}
+  .fc-cd-body{grid-template-columns:1fr}
+  .fc-cd-right{display:none}
+  .fc-browser-chrome{display:none}
+  .fc-fluent,.fc-cardekho,.fc-driveu,.lomiha-card{min-height:auto}
+  /* Grids */
+  .work-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .contact-grid{grid-template-columns:1fr;gap:36px}
+  .tier3-content{grid-template-columns:1fr}
+  .tier3-content [style*="grid-column:span 2"]{grid-column:span 1}
+  .lomiha-card{grid-template-columns:1fr}
+  /* Nav */
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  /* Pcard */
+  .pcard{min-height:0}
+  .card-visual{margin-bottom:10px}
+  /* Filter */
+  .filter-tabs{position:static;padding:8px 0;gap:5px}
+  .filter-tab{padding:6px 12px;font-size:9px}
+  /* Misc */
+  .section-header{margin-bottom:24px}
+  .prd-row{grid-template-columns:1fr;gap:2px}
+  .prd-row-label{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)}
+  /* Side panel full width on mobile */
+  .side-panel{width:100vw;max-width:100vw}
+}
 
 /* ── FLOATING CONTACT PILL ── */
 .float-contact{
@@ -972,7 +1003,8 @@ footer{background:var(--ink);padding:22px clamp(16px,4vw,48px);display:flex;alig
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-left{min-height:auto;padding-bottom:28px}
+  .hero-left{min-height:auto;padding-bottom:0}
+  .hero-right{min-height:auto}
   .hero-right{height:56vw;min-height:260px}
   .featured-strip{grid-template-columns:1fr}
   .float-contact{display:none}
@@ -996,8 +1028,8 @@ footer{background:var(--ink);padding:22px clamp(16px,4vw,48px);display:flex;alig
   .nav-links{display:none}
   .nav-hamburger{display:flex}
   .hero{grid-template-columns:1fr;min-height:auto}
-  .hero-right{min-height:340px}
-  .hero-left{padding:clamp(28px,5vw,48px) 20px clamp(24px,4vw,40px)}
+  .hero-right{min-height:320px}
+  .hero-left{padding:36px 20px 28px}
   .filter-tabs{position:static;padding:8px 0;gap:5px}
   .filter-tab{padding:6px 12px;font-size:9px}
   .work-grid{grid-template-columns:1fr}
@@ -1009,25 +1041,43 @@ footer{background:var(--ink);padding:22px clamp(16px,4vw,48px);display:flex;alig
   .tier3-content{grid-template-columns:1fr}
   .tier3-content [style*="grid-column:span 2"]{grid-column:span 1}
   .lomiha-card{grid-template-columns:1fr}
+  /* Featured cards — stack on mobile */
+  .featured-strip{grid-template-columns:1fr}
+  .fc-cd-body{grid-template-columns:1fr}
+  .fc-cd-right{display:none}
+  .fc-fluent{min-height:auto}
+  .fc-cardekho{min-height:auto}
+  .fc-driveu{min-height:auto}
+  .fc-browser-chrome{display:none}
+  .lomiha-card{min-height:auto}
+  /* Pcard — kill min-height on mobile, let content size it */
+  .pcard{min-height:0}
+  .card-visual{margin-bottom:10px}
 }
 @media(max-width:480px){
-  .hero-headline{font-size:26px}
-  .hero-right{min-height:280px}
-  .hero-sub{font-size:14px}
+  .hero-headline{font-size:24px}
+  .hero-sub{font-size:13px;line-height:1.6}
   .hero-cta-group{gap:8px}
-  .pcard{padding:16px}
-  .pcard-insight{font-size:14px}
-  .about-statement{font-size:18px}
-  .panel-body{padding:18px 18px 60px}
-  .panel-title{font-size:18px}
-  .fc-iframe-wrap iframe,.fc-cd-right iframe{display:none}
-  .fc-iframe-wrap{background:#1E1C1A}
-  .fc-cd-right{background:#1E1C1A;min-height:120px}
-  .fc-fluent,.fc-cardekho,.fc-driveu{min-height:auto}
-  .fc-footer,.fc-cd-footer,.fc-du-footer,.fc-syl-footer{flex-direction:column;align-items:flex-start;gap:12px}
+  .hero-left{padding:28px 16px 24px}
+  .hero-right{padding:22px 16px 26px}
+  .hp-header{padding:11px 12px;gap:9px}
+  .hp-icon{width:30px;height:30px;font-size:14px;border-radius:6px}
+  .hp-name{font-size:12px}
+  .hp-tagline{font-size:10px}
+  .hp-badge{font-size:7px;padding:2px 6px}
+  .hp-chip{font-size:9px;padding:2px 8px}
+  .hp-cta{font-size:9px;padding:7px 12px}
+  .hp-insight{font-size:12px}
+  .hp-footer-note,.hp-footer-link{font-size:9px}
+  .pcard{padding:14px}
+  .pcard-insight{font-size:13px}
+  .about-statement{font-size:17px}
+  .panel-body{padding:16px 16px 60px}
+  .panel-title{font-size:17px}
+  .fc-footer,.fc-cd-footer,.fc-du-footer,.fc-syl-footer{flex-direction:column;align-items:flex-start;gap:10px}
   .fc-footer-title{white-space:normal}
-  .contact-headline{font-size:20px}
-  .cert-embed-frame{height:320px}
+  .contact-headline{font-size:19px}
+  section{padding:clamp(28px,4vw,40px) clamp(14px,4vw,20px)}
 }
 @media(min-width:1280px){
   .work-grid{grid-template-columns:repeat(3,1fr)}
@@ -1114,167 +1164,105 @@ footer{background:var(--ink);padding:22px clamp(16px,4vw,48px);display:flex;alig
   </div>
 
   <div class="hero-right">
-    <!-- Ambient glow that changes per slide -->
-    <div class="spotlight-glow" id="spotlightGlow"></div>
+    <div class="hp-label">Featured Work</div>
+    <div class="hp-list">
 
-    <!-- Slide 1: Fluent -->
-    <div class="spotlight-slide active" id="slide-0">
-      <div class="spotlight-preview-svg">
-        <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-          <!-- Dark UI mockup: Fluent dashboard -->
-          <rect width="480" height="320" fill="#0F1117"/>
-          <!-- Top bar -->
-          <rect x="0" y="0" width="480" height="36" fill="#161B22"/>
-          <circle cx="18" cy="18" r="4" fill="#C17B2F" opacity="0.8"/>
-          <rect x="28" y="14" width="40" height="8" rx="2" fill="#C17B2F" opacity="0.6"/>
-          <rect x="380" y="12" width="60" height="12" rx="6" fill="#2EA043" opacity="0.8"/>
-          <!-- Workflow cards row -->
-          <rect x="20" y="52" width="130" height="72" rx="4" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <rect x="28" y="62" width="50" height="6" rx="2" fill="#C17B2F" opacity="0.7"/>
-          <rect x="28" y="74" width="80" height="4" rx="2" fill="#8B949E" opacity="0.5"/>
-          <rect x="28" y="82" width="65" height="4" rx="2" fill="#8B949E" opacity="0.35"/>
-          <rect x="28" y="100" width="36" height="14" rx="2" fill="#C17B2F" opacity="0.5"/>
-          <rect x="166" y="52" width="130" height="72" rx="4" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <rect x="174" y="62" width="60" height="6" rx="2" fill="#7BC8A4" opacity="0.7"/>
-          <rect x="174" y="74" width="85" height="4" rx="2" fill="#8B949E" opacity="0.5"/>
-          <rect x="174" y="82" width="70" height="4" rx="2" fill="#8B949E" opacity="0.35"/>
-          <rect x="174" y="100" width="36" height="14" rx="2" fill="#7BC8A4" opacity="0.5"/>
-          <rect x="312" y="52" width="148" height="72" rx="4" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <rect x="320" y="62" width="55" height="6" rx="2" fill="#58A6FF" opacity="0.7"/>
-          <rect x="320" y="74" width="90" height="4" rx="2" fill="#8B949E" opacity="0.5"/>
-          <rect x="320" y="82" width="75" height="4" rx="2" fill="#8B949E" opacity="0.35"/>
-          <rect x="320" y="100" width="36" height="14" rx="2" fill="#58A6FF" opacity="0.5"/>
-          <!-- Main panel -->
-          <rect x="20" y="140" width="280" height="160" rx="4" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <rect x="32" y="154" width="90" height="7" rx="2" fill="#E6EDF3" opacity="0.8"/>
-          <rect x="32" y="168" width="240" height="4" rx="2" fill="#8B949E" opacity="0.4"/>
-          <rect x="32" y="178" width="200" height="4" rx="2" fill="#8B949E" opacity="0.3"/>
-          <rect x="32" y="188" width="220" height="4" rx="2" fill="#8B949E" opacity="0.25"/>
-          <!-- Progress bar -->
-          <rect x="32" y="206" width="240" height="6" rx="3" fill="#30363D"/>
-          <rect x="32" y="206" width="156" height="6" rx="3" fill="#C17B2F" opacity="0.8"/>
-          <text x="32" y="228" fill="#8B949E" font-size="8" font-family="sans-serif" opacity="0.6">Step 3 of 5 · AI Workflow Mastery</text>
-          <rect x="32" y="238" width="80" height="20" rx="3" fill="#C17B2F" opacity="0.7"/>
-          <text x="72" y="252" text-anchor="middle" fill="#fff" font-size="9" font-family="sans-serif">Continue</text>
-          <!-- Side panel -->
-          <rect x="316" y="140" width="144" height="160" rx="4" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <rect x="326" y="154" width="60" height="5" rx="2" fill="#8B949E" opacity="0.5"/>
-          <rect x="326" y="165" width="40" height="28" rx="2" fill="#C17B2F" opacity="0.15" stroke="#C17B2F" stroke-width="0.5"/>
-          <text x="346" y="183" text-anchor="middle" fill="#C17B2F" font-size="14" font-family="sans-serif" opacity="0.8">65%</text>
-          <rect x="326" y="200" width="104" height="4" rx="2" fill="#8B949E" opacity="0.3"/>
-          <rect x="326" y="210" width="84" height="4" rx="2" fill="#8B949E" opacity="0.2"/>
-          <rect x="326" y="224" width="50" height="16" rx="2" fill="#7BC8A4" opacity="0.2" stroke="#7BC8A4" stroke-width="0.5"/>
-          <text x="351" y="235" text-anchor="middle" fill="#7BC8A4" font-size="8" font-family="sans-serif" opacity="0.8">On track</text>
-        </svg>
+      <!-- ── Fluent ── -->
+      <div class="hp-item active" id="hp-fluent" onclick="hpToggle('fluent')">
+        <div class="hp-header">
+          <div class="hp-icon fluent">&#9889;</div>
+          <div class="hp-title-group">
+            <div class="hp-name">Fluent &nbsp;&middot;&nbsp; AI Workflow Practice</div>
+            <div class="hp-tagline">0-to-1 &nbsp;&middot;&nbsp; n8n + Gemini 2.5 Flash &nbsp;&middot;&nbsp; MGA Group Project</div>
+          </div>
+          <div class="hp-badge-wrap">
+            <span class="hp-badge live">Live</span>
+            <span class="hp-chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="hp-body">
+          <div class="hp-body-inner">
+            <div class="hp-insight">&ldquo;28 of 30 people used AI last week. Only 3 felt on top of it. The gap is not access.&rdquo;</div>
+            <div class="hp-chips">
+              <span class="hp-chip highlight">Primary research</span>
+              <span class="hp-chip">India + Germany</span>
+              <span class="hp-chip">Full PRD</span>
+              <span class="hp-chip">Live prototype</span>
+            </div>
+            <div class="hp-ctas">
+              <a class="hp-cta primary" href="https://tryfluent.netlify.app" target="_blank" onclick="event.stopPropagation()">View Prototype &#8599;</a>
+              <button class="hp-cta ghost" onclick="event.stopPropagation();openPanel('fluent')">Case Study</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="spotlight-slide-bg-num">01</div>
-      <div class="spotlight-badge live">Live prototype</div>
-      <div class="spotlight-type">AI Product &middot; 0-to-1 &middot; Primary Research</div>
-      <h2 class="spotlight-title">28 of 30 people used AI last week. Only 3 felt on top of it. The gap is not access.</h2>
-      <div class="spotlight-sub">Fluent &middot; AI Workflow Practice Platform &middot; 2026</div>
-      <div class="spotlight-cta-row">
-        <a class="spotlight-cta primary" href="https://tryfluent.netlify.app" target="_blank">View Prototype &#8599;</a>
-        <button class="spotlight-cta ghost" onclick="openPanel('fluent')">Case Study</button>
-      </div>
-    </div>
 
-    <!-- Slide 2: CarDekho -->
-    <div class="spotlight-slide" id="slide-1">
-      <div class="spotlight-preview-svg">
-        <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
-          <!-- Light card UI: CarDekho AI Fit Score -->
-          <rect width="480" height="320" fill="#0F1117"/>
-          <!-- Header bar -->
-          <rect x="0" y="0" width="480" height="40" fill="#161B22"/>
-          <rect x="16" y="14" width="60" height="12" rx="3" fill="#C17B2F" opacity="0.7"/>
-          <rect x="360" y="12" width="100" height="16" rx="8" fill="#C17B2F" opacity="0.2" stroke="#C17B2F" stroke-width="0.6"/>
-          <text x="410" y="23" text-anchor="middle" fill="#C17B2F" font-size="8" font-family="sans-serif" opacity="0.8">AI Copilot</text>
-          <!-- Main fit score card -->
-          <rect x="100" y="56" width="280" height="200" rx="6" fill="#161B22" stroke="#30363D" stroke-width="0.8"/>
-          <!-- Score circle -->
-          <circle cx="240" cy="112" r="36" fill="none" stroke="#30363D" stroke-width="4"/>
-          <circle cx="240" cy="112" r="36" fill="none" stroke="#C17B2F" stroke-width="4"
-            stroke-dasharray="188" stroke-dashoffset="38" stroke-linecap="round"
-            transform="rotate(-90 240 112)"/>
-          <text x="240" y="107" text-anchor="middle" fill="#E6EDF3" font-size="18" font-family="sans-serif" font-weight="bold" opacity="0.9">87</text>
-          <text x="240" y="120" text-anchor="middle" fill="#C17B2F" font-size="8" font-family="sans-serif" opacity="0.7">FIT SCORE</text>
-          <!-- Trust cards row -->
-          <rect x="116" y="164" width="72" height="36" rx="3" fill="#1C2128" stroke="#30363D" stroke-width="0.6"/>
-          <text x="152" y="178" text-anchor="middle" fill="#7BC8A4" font-size="7" font-family="sans-serif" opacity="0.8">BUDGET</text>
-          <text x="152" y="191" text-anchor="middle" fill="#7BC8A4" font-size="10" font-family="sans-serif" font-weight="bold">✓</text>
-          <rect x="196" y="164" width="88" height="36" rx="3" fill="#1C2128" stroke="#30363D" stroke-width="0.6"/>
-          <text x="240" y="178" text-anchor="middle" fill="#7BC8A4" font-size="7" font-family="sans-serif" opacity="0.8">USE CASE</text>
-          <text x="240" y="191" text-anchor="middle" fill="#7BC8A4" font-size="10" font-family="sans-serif" font-weight="bold">✓</text>
-          <rect x="292" y="164" width="72" height="36" rx="3" fill="#1C2128" stroke="#30363D" stroke-width="0.6"/>
-          <text x="328" y="178" text-anchor="middle" fill="#58A6FF" font-size="7" font-family="sans-serif" opacity="0.8">RESALE</text>
-          <text x="328" y="191" text-anchor="middle" fill="#58A6FF" font-size="10" font-family="sans-serif" font-weight="bold">~</text>
-          <!-- CTA -->
-          <rect x="140" y="214" width="200" height="28" rx="4" fill="#C17B2F" opacity="0.85"/>
-          <text x="240" y="232" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="500">This car matches your needs</text>
-          <!-- Small cars row -->
-          <rect x="20" y="56" width="68" height="42" rx="3" fill="#161B22" stroke="#30363D" stroke-width="0.6" opacity="0.6"/>
-          <rect x="28" y="64" width="52" height="20" rx="2" fill="#30363D" opacity="0.5"/>
-          <rect x="28" y="88" width="35" height="5" rx="2" fill="#8B949E" opacity="0.4"/>
-          <rect x="392" y="56" width="68" height="42" rx="3" fill="#161B22" stroke="#C17B2F" stroke-width="0.8"/>
-          <rect x="400" y="64" width="52" height="20" rx="2" fill="#30363D" opacity="0.5"/>
-          <rect x="400" y="88" width="35" height="5" rx="2" fill="#C17B2F" opacity="0.5"/>
-          <rect x="395" y="55" width="66" height="3" rx="1" fill="#C17B2F" opacity="0.6"/>
-        </svg>
+      <!-- ── Car Copilot ── -->
+      <div class="hp-item" id="hp-cardekho" onclick="hpToggle('cardekho')">
+        <div class="hp-header">
+          <div class="hp-icon cardekho">&#128663;</div>
+          <div class="hp-title-group">
+            <div class="hp-name">Car Copilot &nbsp;&middot;&nbsp; CarDekho AI</div>
+            <div class="hp-tagline">AI Fit Score &nbsp;&middot;&nbsp; Trust Cards &nbsp;&middot;&nbsp; Decision Nudge</div>
+          </div>
+          <div class="hp-badge-wrap">
+            <span class="hp-badge prd">PRD + Proto</span>
+            <span class="hp-chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="hp-body">
+          <div class="hp-body-inner">
+            <div class="hp-insight">&ldquo;High intent, no conversion. The platform had no way to tell a buyer they had found the right car.&rdquo;</div>
+            <div class="hp-chips">
+              <span class="hp-chip highlight">AI Fit Score</span>
+              <span class="hp-chip">Trust Cards</span>
+              <span class="hp-chip">Decision Nudge</span>
+              <span class="hp-chip">Full PRD</span>
+            </div>
+            <div class="hp-ctas">
+              <a class="hp-cta primary" href="https://carcopilot-buddy.lovable.app" target="_blank" onclick="event.stopPropagation()">View Prototype &#8599;</a>
+              <button class="hp-cta ghost" onclick="event.stopPropagation();openPanel('cardekho')">Case Study</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="spotlight-slide-bg-num">02</div>
-      <div class="spotlight-badge prd">Full PRD + Prototype</div>
-      <div class="spotlight-type">AI Feature Design &middot; Independent Work</div>
-      <h2 class="spotlight-title">High intent, no conversion. The platform had no way to tell a buyer they had found the right car.</h2>
-      <div class="spotlight-sub">AI Car Buying Companion &middot; CarDekho &middot; 2026</div>
-      <div class="spotlight-cta-row">
-        <a class="spotlight-cta primary" href="https://carcopilot-buddy.lovable.app" target="_blank">View Prototype &#8599;</a>
-        <button class="spotlight-cta ghost" onclick="openPanel('cardekho')">Case Study</button>
-      </div>
-    </div>
 
-    <!-- Slide 3: DriveU -->
-    <div class="spotlight-slide" id="slide-2">
-      <div class="spotlight-preview-driveu">
-        <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;opacity:0.22">
-          <!-- Timeline track -->
-          <line x1="60" y1="150" x2="420" y2="150" stroke="#C17B2F" stroke-width="1.5"/>
-          <!-- Nodes -->
-          <circle cx="120" cy="150" r="6" fill="#C17B2F" opacity="0.9"/>
-          <circle cx="210" cy="150" r="6" fill="#C17B2F" opacity="0.9"/>
-          <circle cx="300" cy="150" r="6" fill="#C17B2F" opacity="0.9"/>
-          <circle cx="390" cy="150" r="6" fill="#C17B2F" opacity="0.9"/>
-          <!-- Node labels -->
-          <text x="120" y="135" text-anchor="middle" fill="#C17B2F" font-size="9" font-family="sans-serif" opacity="0.7">Assigned</text>
-          <text x="210" y="135" text-anchor="middle" fill="#C17B2F" font-size="9" font-family="sans-serif" opacity="0.7">Scheduled</text>
-          <text x="300" y="135" text-anchor="middle" fill="#C17B2F" font-size="9" font-family="sans-serif" opacity="0.7">En Route</text>
-          <text x="390" y="135" text-anchor="middle" fill="#C17B2F" font-size="9" font-family="sans-serif" opacity="0.7">Arriving</text>
-          <!-- Anxiety zone highlight -->
-          <rect x="115" y="160" width="180" height="28" rx="2" fill="#C17B2F" opacity="0.08"/>
-          <text x="205" y="178" text-anchor="middle" fill="#C17B2F" font-size="8" font-family="sans-serif" opacity="0.5">post-assignment anxiety window</text>
-          <!-- Connecting lines down from nodes -->
-          <line x1="120" y1="156" x2="120" y2="160" stroke="#C17B2F" stroke-width="0.8" opacity="0.5"/>
-          <line x1="210" y1="156" x2="210" y2="160" stroke="#C17B2F" stroke-width="0.8" opacity="0.5"/>
-          <line x1="300" y1="156" x2="300" y2="160" stroke="#C17B2F" stroke-width="0.8" opacity="0.5"/>
-        </svg>
+      <!-- ── DriveU ── -->
+      <div class="hp-item" id="hp-driveu" onclick="hpToggle('driveu')">
+        <div class="hp-header">
+          <div class="hp-icon driveu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,200,140,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><line x1="12" y1="3" x2="12" y2="9.5"/><line x1="3.7" y1="16.5" x2="9.3" y2="13.2"/><line x1="20.3" y1="16.5" x2="14.7" y2="13.2"/></svg></div>
+          <div class="hp-title-group">
+            <div class="hp-name">DriveU &nbsp;&middot;&nbsp; Post-Assignment Clarity</div>
+            <div class="hp-tagline">Product Analysis &nbsp;&middot;&nbsp; Full PRD &nbsp;&middot;&nbsp; HelloPM</div>
+          </div>
+          <div class="hp-badge-wrap">
+            <span class="hp-badge prd">Full PRD</span>
+            <span class="hp-chevron">&#9660;</span>
+          </div>
+        </div>
+        <div class="hp-body">
+          <div class="hp-body-inner">
+            <div class="hp-insight">&ldquo;The churn was not about matching speed. It was what happened after the driver was assigned.&rdquo;</div>
+            <div class="hp-chips">
+              <span class="hp-chip highlight">Why-Why analysis</span>
+              <span class="hp-chip">RICE prioritisation</span>
+              <span class="hp-chip">State comms reframe</span>
+            </div>
+            <div class="hp-ctas">
+              <a class="hp-cta primary" href="DriveU_Case_Study_Saurabh_Sudhir.pdf" target="_blank" onclick="event.stopPropagation()">Read Case Study &#8599;</a>
+              <button class="hp-cta ghost" onclick="event.stopPropagation();openPanel('driveu')">PRD Detail</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="spotlight-slide-bg-num">03</div>
-      <div class="spotlight-badge prd">Product Analysis + PRD</div>
-      <div class="spotlight-type">Ride-hailing &middot; Independent Work &middot; HelloPM</div>
-      <h2 class="spotlight-title">The churn was not about matching speed. It was what happened after the driver was assigned.</h2>
-      <div class="spotlight-sub">DriveU &middot; Post-Assignment Clarity &middot; 2026</div>
-      <div class="spotlight-cta-row">
-        <a class="spotlight-cta primary" href="DriveU_Case_Study_Saurabh_Sudhir.pdf" target="_blank">Read Case Study &#8599;</a>
-        <button class="spotlight-cta ghost" onclick="openPanel('driveu')">Product Detail</button>
-      </div>
-    </div>
 
-    <div class="spotlight-dots">
-      <button class="sdot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
-      <button class="sdot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
-      <button class="sdot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
     </div>
-    <div class="spotlight-progress"><div class="spotlight-progress-bar" id="spotlightBar"></div></div>
+    <div class="hp-footer">
+      <span class="hp-footer-note">3 of 10 projects shown</span>
+      <a class="hp-footer-link" href="#work">View all work &#8599;</a>
+    </div>
   </div>
+</div>
 </section>
 
 <!-- ════════════ WORK ════════════ -->
@@ -1762,31 +1750,20 @@ const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.tar
 document.querySelectorAll(".fade-up").forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*0.06}s`;obs.observe(el)});
 
 /* ── Spotlight rotation ── */
-const GLOWS=["rgba(193,123,47,0.12)","rgba(91,127,166,0.12)","rgba(123,200,164,0.08)"];
-let cur=0,total=3,IVMS=5200,tmr;
-function goToSlide(n){
-  document.getElementById("slide-"+cur).classList.remove("active");
-  document.querySelectorAll(".sdot")[cur].classList.remove("active");
-  cur=n;
-  document.getElementById("slide-"+cur).classList.add("active");
-  document.querySelectorAll(".sdot")[cur].classList.add("active");
-  const glow=document.getElementById("spotlightGlow");
-  if(glow){glow.style.background=`radial-gradient(circle, ${GLOWS[cur]} 0%, transparent 70%)`;glow.style.opacity="1"}
-  resetBar();
+/* ── Hero project accordion ── */
+function hpToggle(id){
+  const items=document.querySelectorAll(".hp-item");
+  items.forEach(item=>{
+    const isTarget=item.id==="hp-"+id;
+    if(isTarget){
+      // Toggle: if already active, collapse it; otherwise expand
+      const wasActive=item.classList.contains("active");
+      item.classList.toggle("active",!wasActive);
+    } else {
+      item.classList.remove("active");
+    }
+  });
 }
-function nextSlide(){goToSlide((cur+1)%total)}
-function resetBar(){
-  const bar=document.getElementById("spotlightBar");
-  bar.style.transition="none";bar.style.width="0%";
-  clearInterval(tmr);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    bar.style.transition=`width ${IVMS}ms linear`;bar.style.width="100%";
-    tmr=setInterval(nextSlide,IVMS);
-  }));
-}
-// Trigger initial glow
-setTimeout(()=>{const g=document.getElementById("spotlightGlow");if(g){g.style.background=`radial-gradient(circle, ${GLOWS[0]} 0%, transparent 70%)`;g.style.opacity="0.8"}},100);
-resetBar();
 
 /* ── Floating pill ── */
 let pinned=false;
